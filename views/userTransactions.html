@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/styles/styles.css" />
+
+    <title>User Transactions</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <style>
+      body{
+        background-color: #EFF3F3;
+      }
+      .row{
+        padding: 20px
+      }
+    </style>
+
+    <script>
+      window.onload = function() {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+	         animationEnabled: true,
+	          title: {
+		            text: "Your Current Monthly Budget Pie Chart"
+	             },
+	              data: [{
+		                type: "pie",
+		                startAngle: 240,
+		                yValueFormatString: "##0.00\"%\"",
+		                indexLabel: "{label} {y}",
+		                dataPoints: [
+			              {y: <%=wants%>, label: "Wants"},
+			              {y: <%=needs%>, label: "Needs"},
+			              {y: <%=savings%>, label: "Savings & Investments"},
+			              ]
+	              }]
+       });
+       chart.render();
+
+      }
+   </script>
+
+   <script>
+
+      var showTransactions = (function() {
+        var run = false;
+        return function() {
+          if (!run) {
+              run = true;
+              // do something
+              (function ($) {
+              $(document).ready(function () {
+                $.post('/userTransactions/getTransactions', {}, function(data, status) {
+                  if(data != "Error") {
+                    //console.log(data);
+                    var messages = JSON.parse(data);
+                    number = 0;
+                    messages.forEach(function(item) {
+                      //console.log(item);
+                      number++;
+                      $("body").append(
+                        "<div class='row'>"+
+                          "<div class='col-lg-12'>"+
+
+                            "<div class='card'>"+
+                              "<h5 class='card-header'>April 2020</h5>"+
+                              "<div class='card-body'>"+
+                                "<p class='card-text'>"+
+                                item+
+                                "</p>"+
+
+                              "</div>"+
+                            "</div>"+
+
+                          "</div>"+
+                        "</div>"
+                      );
+                    })
+                  }
+                });
+              });
+              })(jQuery);
+          }
+        };
+      })();
+
+      showTransactions();
+
+
+   </script>
+
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav">
+            <li><a href="/space/createSpace">Create Space</a></li>
+            <li><a href="/space/join_space">Join Space</a></li>
+            <li><a href="/account/all_spaces">Existing Budget Spaces</a></li>
+            <li><a href="/budget/">Create Budget</a></li>
+            <li><a href="/userTransactions/">Show Transactions</a></li>
+            <li><a href="/account/logout">Log out</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <p class="lead">
+          The 50-30-20 rule puts 50% of your income towards necessities, like
+          housing and bills. Tweny percent should then go toward financial goals,
+          like paying off debt or saving for retirement. Finally 30% of your income
+          can be allocated to wants, like dining or entertainment.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>Your transactions <span style='font-size:45px;'>&#128526;</span></h1>
+      </div>
+    </div>
+
+    <!--<div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <h5 class="card-header">April 2020</h5>
+          <div class="card-body">
+            <p class="card-text">5H631KIH5ON confirmed. You have received a payment of Tsh1,200.00 from 261919 - AIRTEL MONEY TANZANIA on 6/8/18 at 3:22 PM. New M-Pesa balance is Tsh1,365.50</p>
+
+          </div>
+        </div>
+
+      </div>
+    </div> -->
+
+
+  </body>
+</html>

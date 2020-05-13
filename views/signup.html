@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/static/styles/styles.css" />
+
+  </head>
+  <style>
+    body {
+			background-color: #EFF3F3;
+      font-family: 'Raleway', sans-serif;
+    }
+
+		button{
+			margin-top: 10px;
+		}
+		.navbar{
+			background-color: #FAB109;
+
+		}
+  </style>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+	      <div class="container-fluid">
+	        <ul class="nav navbar-nav">
+	          <li><a href="/account/login">Log In</a></li>
+	          <li><a href="/account/signup">Sign Up</a></li>
+	        </ul>
+	      </div>
+	    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h1>Sign Up to get your shit together!</h1>
+            <form class="needs-validation" method="POST" novalidate>
+              <div class="form-row">
+                <div class="col-md-8">
+                  <label for="firstName">First name</label>
+                  <input type="text" name="firstName" class="form-control" id="firstName" required>
+
+                </div>
+                <div class="col-md-8">
+                  <label for="lastName">Last name</label>
+                  <input type="text" name="lastName" class="form-control" id="lastName" required>
+
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-8 ">
+                  <label for="username">Username</label>
+                  <div class="input-group">
+
+                    <input type="text" name="username" class="form-control" id="userName" required>
+                    <div class="invalid-tooltip">
+                      Unique username.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <label for="pass">Password</label>
+                  <input type="password" class="form-control" name="password" id="pass"  required>
+                  <div class="invalid-tooltip">
+                    Appropriate password.
+                  </div>
+                </div>
+              </div>
+							<% if (error) { %>
+                  <div class="alert alert-danger"><%= error %></div>
+                <% } %>
+              <button class="btn btn-primary" type="submit">Sign Up!</button>
+            </form>
+        </div>
+      </div>
+    </div>
+	</body>
+</html>

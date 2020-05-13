@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/static/styles/login.css" />
+
+  </head>
+  <style>
+    /* body {
+			background-color: #EFF3F3;
+      font-family: 'Raleway', sans-serif;
+    } */
+		#head {
+      color: darkblue;
+      text-align: center;
+      margin-top: 5%;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+    #log {
+      margin: 15px;
+    }
+		li {
+			list-style: none;
+		  padding: 15px;
+		  margin: 5px;
+		  transition: all 0.5s;
+		  color: black;
+			display: inline;
+
+		}
+		.navbar{
+		  background-color: #00A1F2;
+		  display: flex;
+		  width: 100%;
+		  height: 100px;
+		  color: black;
+		}
+
+		.nav {
+		  display: inline-block;
+			color: black;
+		}
+
+  </style>
+
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#signup").hide().attr("formnovalidate");
+    });
+		</script>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+	      <div class="container-fluid">
+	        <ul class="nav navbar-nav">
+	          <li><a href="/space/createSpace">Create Space</a></li>
+	          <li><a href="/space/join_space">Join Space</a></li>
+						<li><a href="/account/all_spaces">Existing Budget Spaces</a></li>
+						<li><a href="/budget">Create Budget</a></li>
+						<li><a href="/userTransactions/">Show Transactions</a></li>
+						<li class = "lo"><a href="/account/logout">Log out</a></li>
+	        </ul>
+	      </div>
+	    </nav>
+
+      </p>
+    <!-- <form id="log" method="POST">
+      <h1 id="head">Create Budget Space</h1>
+      <div class="form-group">
+        <label for="username" class="col-sm-2" style="margin-left: 45%;">Space name</label>
+        <div class="col-sm-4">
+          <input type="text" name="space" class="form-control" id="username" style="margin-left: 110%;">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="col-sm-2" style="margin-left: 45%;">Space Code</label>
+        <div class="col-sm-4">
+          <input type="password" name="password" class="form-control" id="password" style="margin-left: 110%;">
+        </div>
+      </div>
+
+			<br>
+			<% if (error) { %>
+					<div class="alert alert-danger"><%= error %></div>
+				<% } %>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form> -->
+
+		<form id="signin" method="POST" action='/space/createSpace'>
+      <h1 class="fadeIn zeroth">Create Budget Space</h1>
+				<input type="text" class="fadeIn first" name="space" class="form-control" id="username" placeholder="Space name">
+       <input type="password" class="fadeIn second" name="password" class="form-control" id="password" placeholder="Space Code">
+      </div>
+			<% if (error) { %>
+					<div class="alert alert-danger"><%= error %></div>
+				<% } %>
+      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+			<input type="submit" class="fadeIn third" value="Submit">
+
+      <p style="text-align: center; font-size:40px;">Already have a budget space? Click <a href="\space\join_space">here</a></p>
+    </form>
+
+		<!-- <h3 style="text-align: center">Already have a budget space? Click <a href="/space/join_space">here</a> to Join your existing space!</h3> -->
+
+
+	</body>
+</html>

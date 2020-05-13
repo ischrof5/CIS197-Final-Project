@@ -1,0 +1,390 @@
+<!-- <html>
+	<head>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/static/styles/styles.css" />
+
+	</head>
+  <style>
+
+		#log {
+      margin: 15px;
+    }
+
+		body {
+      font-family: 'Raleway', sans-serif;
+			background-color: #FCFCFB;
+    }
+    #head {
+      color: darkblue;
+      text-align: center;
+      margin-top: 5%;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+  </style>
+
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+	      <div class="container-fluid">
+	        <ul class="nav navbar-nav">
+	          <li><a href="/account/login">Log In</a></li>
+	          <li><a href="/account/signup">Sign Up</a></li>
+	        </ul>
+	      </div>
+	    </nav>
+
+    <div id="head"><h1>Budget Tracker</h1></div>
+		<div id="head"><h2>Get your shit together</h2></div>
+
+    <div id="log">
+      <h1 class="login">Log In</h1>
+      <form method="POST" action="/account/login">
+				<div class="form-group">
+	        <label for="username" class="col-sm-4" class="login">Username</label>
+	        <input type="text" name="username" class="form-control" id="username" class="login">
+	      </div>
+      <div class="form-group">
+        <label for="password" class="col-sm-4" class="login">Password</label>
+        <input type="password" name="password" class="form-control" id="password" class="login">
+      </div>
+			<% if (error) { %>
+					<div class="alert alert-danger"><%= error %></div>
+				<% } %>
+      <button type="submit" class="btn btn-primary" id="butt">Submit</button>
+    </form>
+    </div>
+    <h3 style="text-align: center">Click <a href="/account/signup">here</a> to Sign Up!</h3>
+	</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/static/styles/login.css" />
+</head>
+
+<body>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#signup").hide().attr("formnovalidate");
+    });
+    $(document).ready(function () {
+      $("#signupBtn").click(function () {
+        if ($("#signinBtn").hasClass("active")) {
+          $("#formContent").animate({ height: $("#formContent").height() + $("#signup").height() - $("#signin").height() }, 400);
+          $("#signin").hide().attr("formnovalidate");
+          $("#signup").show();
+          $("#signinBtn").addClass("inactive underlineHover");
+          $("#signinBtn").removeClass("active");
+          $("#signupBtn").removeClass("inactive underlineHover");
+          $("#signupBtn").addClass("active");
+        }
+      });
+      $("#signinBtn").click(function () {
+        if ($("#signupBtn").hasClass("active")) {
+          $("#formContent").animate({ height: $("#formContent").height() + $("#signin").height() - $("#signup").height() }, 400);
+          $("#signin").show();
+          $("#signup").hide().attr("formnovalidate");
+          $("#signinBtn").removeClass("inactive underlineHover");
+          $("#signinBtn").addClass("active");
+          $("#signupBtn").addClass("inactive underlineHover");
+          $("#signupBtn").removeClass("active");
+        }
+      });
+      $("#password").focus(function () {
+        $("#password").removeClass("error");
+      });
+      $("#username").focus(function () {
+        $("#username").removeClass("error");
+      });
+      $("#first-name").focus(function () {
+        $("#first-name").removeClass("error");
+      });
+      $("#last-name").focus(function () {
+        $("#last-name").removeClass("error");
+      });
+      $("#new-username").focus(function () {
+        $("#new-username").removeClass("error");
+      });
+      $("#new-password").focus(function () {
+        $("#new-password").removeClass("error");
+      });
+      $("#confirm-password").focus(function () {
+        $("#confirm-password").removeClass("error");
+      });
+    });
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //   document.forms["signin"].addEventListener('submit', checkLogin);
+    // });
+
+    // var checkLogin = function (e) {
+    //   e.preventDefault();
+    //   valid = true;
+    //   if (e.target.username.value === '') {
+    //     $('#error-un').addClass("animated shake");
+    //     $("#username").addClass("error");
+    //     $('#error-un').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-un').removeClass('animated shake');
+    //       });
+    //     valid = false;
+    //   }
+    //   if (e.target.password.value === '') {
+    //     $('#error-pw').addClass("animated shake");
+    //     $("#password").addClass("error");
+    //     $('#error-pw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-pw').removeClass('animated shake');
+    //       });
+    //     valid = false;
+    //   }
+    //   if (valid) {
+    //     $.post('/account/login', { username: e.target.username.value.toLowerCase(), password: e.target.password.value }, function (data) {
+    //       if (data.success) {
+    //         location.reload();
+    //       } else {
+    //         if (data.message === "Incorrect password") {
+    //           $('#error-pw').addClass("animated shake");
+    //           $("#password").addClass("error");
+    //           $('#error-pw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-pw').removeClass('animated shake');
+    //             });
+    //         } else if (data.message === "User does not exist") {
+    //           $('#error-un').addClass("animated shake");
+    //           $("#username").addClass("error");
+    //           $('#error-un').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-un').removeClass('animated shake');
+    //             });
+    //         } else {
+    //           $('#error-pw').addClass("animated shake");
+    //           $("#password").addClass("error");
+    //           $('#error-pw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-pw').removeClass('animated shake');
+    //             });
+    //           $('#error-un').addClass("animated shake");
+    //           $("#username").addClass("error");
+    //           $('#error-un').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-un').removeClass('animated shake');
+    //             });
+    //         }
+    //       }
+    //     });
+    //   }
+    // };
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //   document.forms["signup"].addEventListener('submit', createAccount);
+    // });
+		//
+    // var createAccount = function (e) {
+    //   e.preventDefault();
+    //   valid = true;
+    //   if (e.target.firstName.value === '') {
+    //     $('#error-fn').addClass("animated shake");
+    //     $("#first-name").addClass("error");
+    //     $('#error-fn').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-fn').removeClass('animated shake');
+    //       });
+    //     valid = false;
+    //   }
+    //   if (e.target.lastName.value === '') {
+    //     $('#error-ln').addClass("animated shake");
+    //     $("#last-name").addClass("error");
+    //     $('#error-ln').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-ln').removeClass('animated shake');
+    //       });
+    //     valid = false;
+    //   }
+    //   if (e.target.newUsername.value === '' || /\s/.test(e.target.newUsername.value)) {
+    //     $('#error-nun').addClass("animated shake");
+    //     $("#new-username").addClass("error");
+    //     $('#error-nun').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-nun').removeClass('animated shake');
+    //       });
+    //     valid = false;
+    //   }
+    //   if (e.target.newPassword.value === '') {
+    //     $('#error-npw').addClass("animated shake");
+    //     $("#new-password").addClass("error");
+    //     $('#error-npw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-npw').removeClass('animated shake');
+    //       });
+    //     valid = false;
+    //   }
+    //   if (e.target.confirmPassword.value === '') {
+    //     $('#error-cpw').addClass("animated shake");
+    //     $("#confirm-password").addClass("error");
+    //     $('#error-cpw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-cpw').removeClass('animated shake');
+    //       });
+    //     valid = false;
+    //   }
+    //   if (e.target.newPassword.value !== e.target.confirmPassword.value) {
+    //     $('#error-npw').addClass("animated shake");
+    //     $("#new-password").addClass("error");
+    //     $('#error-npw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-npw').removeClass('animated shake');
+    //       });
+    //     $('#error-cpw').addClass("animated shake");
+    //     $("#confirm-password").addClass("error");
+    //     $('#error-cpw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //       function (e) {
+    //         $('#error-cpw').removeClass('animated shake');
+    //       });
+    //     valid = false;
+    //   }
+    //   if (valid) {
+    //     $.post('/account/signup', { firstName: e.target.firstName.value, lastName: e.target.lastName.value, newUsername: e.target.newUsername.value.toLowerCase(), newPassword: e.target.newPassword.value, confirmPassword: e.target.confirmPassword.value }, function (data) {
+    //       if (data.success) {
+    //         location.reload();
+    //       } else {
+    //         if (data.message === "User already exists") {
+    //           $('#error-nun').addClass("animated shake");
+    //           $("#new-username").addClass("error");
+    //           $('#error-nun').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-nun').removeClass('animated shake');
+    //             });
+    //         } else {
+    //           $('#error-fn').addClass("animated shake");
+    //           $("#first-name").addClass("error");
+    //           $('#error-fn').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-fn').removeClass('animated shake');
+    //             });
+    //           $('#error-ln').addClass("animated shake");
+    //           $("#last-name").addClass("error");
+    //           $('#error-ln').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-ln').removeClass('animated shake');
+    //             });
+    //           $('#error-nun').addClass("animated shake");
+    //           $("#new-username").addClass("error");
+    //           $('#error-nun').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-nun').removeClass('animated shake');
+    //             });
+    //           $('#error-npw').addClass("animated shake");
+    //           $("#new-password").addClass("error");
+    //           $('#error-npw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-npw').removeClass('animated shake');
+    //             });
+    //           $('#error-cpw').addClass("animated shake");
+    //           $("#confirm-password").addClass("error");
+    //           $('#error-cpw').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+    //             function (e) {
+    //               $('#error-cpw').removeClass('animated shake');
+    //             });
+    //         }
+    //       }
+    //     });
+    //   }
+    // };
+
+
+  </script>
+  <div class="wrapper">
+    <h1 class="fadeIn zeroth">Benki</h1>
+    <h3 class="fadeIn third">Manage Money Better</h3>
+    <div class="wrapper fadeInDown">
+
+      <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 id="signinBtn" class="active"> Sign In </h2>
+        <h2 id="signupBtn" class="inactive underlineHover">Sign Up</h2>
+
+				<form method="POST" action="/account/login" id="signin">
+						<span id="error-un">
+		        <input type="text" class="fadeIn first" name="username" class="form-control" id="username" placeholder="username"
+              onfocus="this.placeholder = ''" onblur="this.placeholder = 'username'">
+					</span>
+					<span id="error-pw">
+	        <input type="password" class="fadeIn second" name="password" class="form-control" id="password"
+					placeholder="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'">
+				</span>
+				<% if (error) { %>
+						<div class="alert alert-danger"><%= error %></div>
+					<% } %>
+					<input type="submit" class="fadeIn third" value="Sign In">
+	    </form>
+
+			<form id="signup" class="needs-validation" method="POST" action="/account/signup">
+				<div id="name-wrapper">
+					<div id="error-fn">
+						<input type="text" id="first-name" class="fadeIn first" name="firstName" placeholder="first name"
+							onfocus="this.placeholder = ''" onblur="this.placeholder = 'first name'" required>
+						</div>
+						<div id="error-ln">
+						<input type="text" id="last-name" class="fadeIn first" name="lastName" placeholder="last name"
+							onfocus="this.placeholder = ''" onblur="this.placeholder = 'last name'" required>
+							</div>
+				</div>
+
+							<input type="text" id="new-username" class="fadeIn second" name="username" placeholder="username"
+	              onfocus="this.placeholder = ''" onblur="this.placeholder = 'username'" required>
+
+						<input type="password" id="confirm-password" class="fadeIn fourth" name="password"
+              placeholder="password" onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'password'" required>
+
+
+				<% if (error) { %>
+						<div class="alert alert-danger"><%= error %></div>
+					<% } %>
+				<input type="submit" class="fadeIn fifth" value="Sign Up">
+			</form>
+        <!-- <form id="signup">
+          <div id="name-wrapper">
+            <div id="error-fn">
+              <input type="text" id="first-name" class="fadeIn first" name="firstName" placeholder="first name"
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'first name'">
+            </div>
+            <div id="error-ln">
+              <input type="text" id="last-name" class="fadeIn first" name="lastName" placeholder="last name"
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'last name'">
+            </div>
+          </div>
+          <div id="error-nun">
+            <input type="text" id="new-username" class="fadeIn second" name="newUsername" placeholder="new username"
+              onfocus="this.placeholder = ''" onblur="this.placeholder = 'new username'">
+          </div>
+          <div id="error-npw">
+            <input type="password" id="new-password" class="fadeIn third" name="newPassword" placeholder="new password"
+              onfocus="this.placeholder = ''" onblur="this.placeholder = 'new password'">
+          </div>
+          <div id="error-cpw">
+            <input type="password" id="confirm-password" class="fadeIn fourth" name="confirmPassword"
+              placeholder="confirm password" onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'confirm password'">
+          </div>
+          <input type="submit" class="fadeIn fifth" value="Sign Up">
+        </form> -->
+
+        <!-- Remind Passowrd
+        <div id="formFooter">
+          <a class="underlineHover" href="#">Forgot Password?</a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
